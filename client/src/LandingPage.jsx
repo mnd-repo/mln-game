@@ -37,30 +37,30 @@ export default function LandingPage() {
   return (
     <Scene type="lobby">
       <div className="masthead">
-        <span className="kicker">HR presents a hiring exercise</span>
-        <h1>THE AUTOMATION TEST</h1>
-        <p className="subtitle">Pin your resume to the board. Management decides your fate.</p>
+        <span className="kicker">Chào mừng đến phòng nhân sự</span>
+        <h1>VƯỢT QUA TỰ ĐỘNG HÓA</h1>
+        <p className="subtitle">Đăng hồ sơ. Quản lý quyết phận.</p>
       </div>
 
       <PaperCard attach="pin" pin="blue" tilt={-1.1} centered>
-        <h2 className="paper-title">Host a game</h2>
-        <p className="job-desc">Create a room and put it up on the big screen.</p>
+        <h2 className="paper-title">Tạo phòng</h2>
+        <p className="job-desc">Chiếu lên màn hình lớn.</p>
         <button className="btn btn-block" onClick={createGame} disabled={creating}>
-          {creating ? 'Setting up the board…' : 'Create Game'}
+          {creating ? 'Đang chuẩn bị bảng…' : 'Tạo Game'}
         </button>
       </PaperCard>
 
       <PaperCard attach="tape" tilt={0.8} centered>
-        <h2 className="paper-title">Join a game</h2>
-        <p className="job-desc">Got a code from the host? Pin in here.</p>
+        <h2 className="paper-title">Gia nhập phòng</h2>
+        <p className="job-desc">Nhập mã phòng tại đây.</p>
         <form onSubmit={joinGame}>
           <input
-            placeholder="Enter join code"
+            placeholder="Nhập mã tham gia"
             value={code}
             onChange={(e) => setCode(e.target.value)}
             maxLength={5}
           />
-          <button type="submit" className="btn btn-accent btn-block">Join</button>
+          <button type="submit" className="btn btn-accent btn-block">Sẵn sàng</button>
         </form>
       </PaperCard>
 

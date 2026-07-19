@@ -15,12 +15,11 @@ export default function RevealDashboard({ dashboard }) {
     return (
       <Scene type="manager">
         <PaperCard attach="pin" pin="red" tilt={-0.5} centered className="reveal-twist">
-          <h2 className="paper-title" style={{ fontSize: '1.6rem' }}>Before we see the results…</h2>
+          <h2 className="paper-title" style={{ fontSize: '1.6rem' }}>Trước khi xem kết quả…</h2>
           <p className="twist-line">
-            Half of every vote you cast was actually judging a resume written by
-            AI — not by the human contestant.
+            Mục đích của Game này là gì?
           </p>
-          <button className="btn" onClick={() => setTwistShown(true)}>Show Me The Data</button>
+          <button className="btn" onClick={() => setTwistShown(true)}>Xem kết quả</button>
         </PaperCard>
       </Scene>
     );
@@ -34,18 +33,18 @@ export default function RevealDashboard({ dashboard }) {
   return (
     <Scene type="manager" wide>
       <div className="masthead">
-        <h1>THE FULL REVEAL</h1>
+        <h1>KẾT QUẢ CUỐI CÙNG</h1>
       </div>
 
       <PaperCard attach="pin" pin="blue" tilt={-0.3} centered>
-        <h2 className="paper-title">Overall Approval</h2>
+        <h2 className="paper-title">Tỷ lệ duyệt thuê</h2>
         <div className="stat-row">
           <div className="stat">
-            <span className="stat-label">Human resumes</span>
+            <span className="stat-label">Hồ sơ của bạn</span>
             <span className="stat-value human">{pct(avgHuman)}</span>
           </div>
           <div className="stat">
-            <span className="stat-label">AI resumes</span>
+            <span className="stat-label">Hồ sơ AI</span>
             <span className="stat-value ai">{pct(avgAi)}</span>
           </div>
         </div>
@@ -59,28 +58,28 @@ export default function RevealDashboard({ dashboard }) {
           tilt={i % 2 === 0 ? -0.6 : 0.6}
           className="round-reveal"
         >
-          <h3 className="job-title">Round {r.roundNumber}: {r.jobTitle}</h3>
-          <p className="job-seeker-name">Job Seeker: {r.jobSeekerName}</p>
+          <h3 className="job-title">Vòng {r.roundNumber}: {r.jobTitle}</h3>
+          <p className="job-seeker-name">Ứng viên: {r.jobSeekerName}</p>
 
           <div className="resume-compare">
             <div className="resume-block">
-              <h4><span className="pushpin pin-blue" style={{ position: 'static', width: 10, height: 10 }} />Human Resume</h4>
+              <h4><span className="pushpin pin-blue" style={{ position: 'static', width: 10, height: 10 }} />Hồ sơ của người</h4>
               <p>{r.humanResume}</p>
-              <p className="approval">Approval: {pct(r.humanApprovalRate)} ({r.humanVotes} votes)</p>
+              <p className="approval">Được duyệt: {pct(r.humanApprovalRate)} ({r.humanVotes} phiếu)</p>
             </div>
             <div className="resume-block is-ai">
-              <h4><span className="pushpin pin-red" style={{ position: 'static', width: 10, height: 10 }} />AI Resume</h4>
+              <h4><span className="pushpin pin-red" style={{ position: 'static', width: 10, height: 10 }} />Hồ sơ AI</h4>
               <p>{r.aiResume}</p>
-              <p className="approval">Approval: {pct(r.aiApprovalRate)} ({r.aiVotes} votes)</p>
+              <p className="approval">Được duyệt: {pct(r.aiApprovalRate)} ({r.aiVotes} phiếu)</p>
             </div>
           </div>
 
           <div className="ai-verdict">
-            <strong>The AI's own verdict on the human</strong>
+            <strong>AI phán quyết hồ sơ của bạn...</strong>
             <p>
-              "{r.aiVerdictReasoning}" — Decision:{' '}
+              "{r.aiVerdictReasoning}" — Quyết định:{' '}
               <span className={r.aiVerdictDecision === 'hire' ? 'decision-hire' : 'decision-automate'}>
-                {r.aiVerdictDecision === 'hire' ? 'HIRE' : 'AUTOMATE'}
+                {r.aiVerdictDecision === 'hire' ? 'THUÊ' : 'TỰ ĐỘNG HÓA'}
               </span>
             </p>
           </div>
@@ -89,9 +88,8 @@ export default function RevealDashboard({ dashboard }) {
 
       <PaperCard attach="pin" pin="yellow" tilt={-0.2} centered className="closing-line">
         <p>
-          While you were racing to save a fictional job from automation, an AI
-          was quietly competing against you on the real task in front of you
-          the whole time.
+          Trong khi nhập vai nhưng người ảnh hưởng bởi tự động hóa... 
+          Chính bạn cũng đang đối diện với tiềm nguy của AI
         </p>
       </PaperCard>
     </Scene>

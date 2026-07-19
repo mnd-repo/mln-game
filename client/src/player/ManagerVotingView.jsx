@@ -23,30 +23,30 @@ export default function ManagerVotingView({ jobTitle, jobDescription, candidateR
 
       <PaperCard attach="tape" tilt={0.5}>
         <div className="resume-display">
-          <h3>Candidate's Resume</h3>
+          <h3>Hồ sơ của Ứng viên</h3>
           <p>{candidateResume}</p>
         </div>
 
         <p className="hand-note centered" style={{ textAlign: 'center' }}>
-          Do we hire this human, or automate the job?
+          Thuê, hay tự động hóa?
         </p>
         <div className="stamp-row">
           <StampButton
-            label="Hire"
+            label="Thuê"
             variant="hire"
             onClick={() => handleVote('hire')}
             disabled={Boolean(voted)}
             stamped={voted === 'hire'}
           />
           <StampButton
-            label="Automate"
+            label="Tự động hóa"
             variant="automate"
             onClick={() => handleVote('automate')}
             disabled={Boolean(voted)}
             stamped={voted === 'automate'}
           />
         </div>
-        {voted && <p className="hint centered" style={{ textAlign: 'center' }}>Stamped. Waiting for other Managers…</p>}
+        {voted && <p className="hint centered" style={{ textAlign: 'center' }}>Đã đóng dấu. Đang đợi phòng quản lý…</p>}
       </PaperCard>
     </Scene>
   );

@@ -16,24 +16,24 @@ export default function JobSeekerWritingView({ jobTitle, jobDescription, deadlin
   return (
     <Scene type="writer">
       <PaperCard attach="pin" pin="red" tilt={-0.5} centered stack={false}>
-        <span className="round-label">You're the Job Seeker</span>
+        <span className="round-label">Bạn là ứng viên Tìm việc</span>
         <h3 className="job-title">{jobTitle}</h3>
         <p className="job-desc">{jobDescription}</p>
         <CountdownBar deadline={deadline} soundKey="writer-countdown" />
-        <p className="hand-note">90 seconds — convince Management to keep a human here.</p>
+        <p className="hand-note">90 giây — cần thuyết phục Ban quản lý giữ việc của bạn.</p>
       </PaperCard>
 
       <PaperCard attach="tape" tilt={0.6}>
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="Write your resume here…"
+          placeholder="Viết hồ sơ của bạn tại đây…"
           rows={10}
           disabled={submitted}
           autoFocus
         />
         <button className="btn btn-block" onClick={handleSubmit} disabled={submitted}>
-          {submitted ? 'Submitted' : 'Submit Resume'}
+          {submitted ? 'Đã nộp' : 'Nộp hồ sơ'}
         </button>
       </PaperCard>
     </Scene>

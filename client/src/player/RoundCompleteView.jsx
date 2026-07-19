@@ -11,8 +11,8 @@ export default function RoundCompleteView() {
   return (
     <Scene type="manager">
       <PaperCard attach="pin" pin="green" tilt={-0.3} centered>
-        <h2 className="paper-title">Voting complete</h2>
-        <p className="hint">Filed away. Next round starting soon…</p>
+        <h2 className="paper-title">Bỏ phiếu hoàn thành</h2>
+        <p className="hint">Đã lưu hồ sơ. Vòng tiếp trong giây lát…</p>
       </PaperCard>
     </Scene>
   );

@@ -98,8 +98,8 @@ export default function PlayerApp() {
       return (
         <Scene type="writer">
           <PaperCard attach="pin" pin="green" tilt={-0.4} centered>
-            <h2 className="paper-title">Resume submitted!</h2>
-            <p className="hint">Management is reviewing it now…</p>
+            <h2 className="paper-title">Hồ sơ đã được gửi!</h2>
+            <p className="hint">Ban quản lý đang xem xét…</p>
           </PaperCard>
         </Scene>
       );
@@ -109,8 +109,8 @@ export default function PlayerApp() {
       return (
         <Scene type="writer">
           <PaperCard attach="pin" pin="yellow" tilt={0.5} centered>
-            <h2 className="paper-title">Management is voting…</h2>
-            <p className="hint">Hang tight while they decide.</p>
+            <h2 className="paper-title">Ban quản lý đang bỏ phiếu…</h2>
+            <p className="hint">Kiên nhẫn đợi quyết định.</p>
           </PaperCard>
         </Scene>
       );
@@ -130,8 +130,8 @@ export default function PlayerApp() {
       return (
         <Scene type="lobby">
           <PaperCard attach="pin" pin="blue" tilt={-0.3} centered>
-            <h2 className="paper-title">Game complete!</h2>
-            <p className="hint">Check the host screen for the full reveal.</p>
+            <h2 className="paper-title">Kết thúc Game!</h2>
+            <p className="hint">Hướng lên màn hình lớn cho kết quả.</p>
           </PaperCard>
         </Scene>
       );
@@ -139,9 +139,9 @@ export default function PlayerApp() {
       return (
         <Scene type="lobby">
           <PaperCard attach="pin" pin="red" tilt={0.4} centered>
-            <h2 className="paper-title">You're in!</h2>
-            <p className="hint">Waiting for the host to start the game…</p>
-            <p className="hand-note">{roster.players.length} players connected</p>
+            <h2 className="paper-title">Đã vào phòng!</h2>
+            <p className="hint">Đang đợi Host bắt đầu…</p>
+            <p className="hand-note">{roster.players.length} người chơi đã vào</p>
           </PaperCard>
         </Scene>
       );
