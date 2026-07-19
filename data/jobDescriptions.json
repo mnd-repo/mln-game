@@ -1,92 +1,92 @@
 [
   {
     "id": "job-001",
-    "title": "Customer Support Triage Lead",
-    "aiThreat": "A new AI ticket-routing system already resolves 80% of inbound requests without a human.",
-    "description": "Your company is piloting an AI system that auto-resolves support tickets. Convince Management that a human triage lead is still worth keeping on staff."
+    "title": "Trưởng nhóm phân loại yêu cầu hỗ trợ khách hàng",
+    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
   },
   {
     "id": "job-002",
-    "title": "Junior Copywriter",
-    "aiThreat": "Marketing leadership has been using an AI writing tool for first drafts and is impressed with the speed.",
-    "description": "The marketing team has been quietly using AI to draft ad copy. Convince Management a junior copywriter still adds something the AI can't."
+    "title": "Nhân viên viết nội dung quảng cáo (Junior)",
+    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
   },
   {
     "id": "job-003",
-    "title": "Warehouse Inventory Auditor",
-    "aiThreat": "Camera-based computer vision can now count and track inventory in real time across the warehouse floor.",
-    "description": "A new computer-vision system tracks every pallet in the warehouse automatically. Convince Management a human auditor is still necessary."
+    "title": "Nhân viên kiểm kê kho",
+    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
   },
   {
     "id": "job-004",
-    "title": "Paralegal (Contract Review)",
-    "aiThreat": "An AI contract-review tool now flags risky clauses in seconds, a task that used to take a paralegal hours.",
-    "description": "The firm just licensed an AI tool that reviews contracts for risky clauses in seconds. Convince Management a paralegal is still worth the cost."
+    "title": "Chuyên viên pháp lý hợp đồng",
+    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
   },
   {
     "id": "job-005",
-    "title": "Radiology Technician (Scan Triage)",
-    "aiThreat": "An FDA-cleared AI model now pre-screens scans for anomalies before a human ever looks at them.",
-    "description": "A diagnostic AI now pre-screens every scan before a human reviews it. Convince Management a technician's judgment is still essential."
+    "title": "Kỹ thuật viên chẩn đoán hình ảnh (Sàng lọc phim chụp)",
+    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
   },
   {
     "id": "job-006",
-    "title": "Truck Dispatch Coordinator",
-    "aiThreat": "A route-optimization algorithm can now assign drivers and routes with no human dispatcher in the loop.",
-    "description": "Routing software can now assign every driver automatically. Convince Management that a human coordinator still matters."
+    "title": "Điều phối vận tải",
+    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
   },
   {
     "id": "job-007",
-    "title": "Junior Financial Analyst",
-    "aiThreat": "An AI model can generate quarterly forecasts and flag anomalies faster than the junior analyst team.",
-    "description": "Finance leadership is testing an AI model that builds forecasts in minutes. Convince Management a junior analyst is still needed."
+    "title": "Chuyên viên phân tích tài chính (Junior)",
+    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
   },
   {
     "id": "job-008",
-    "title": "Hotel Front Desk Agent",
-    "aiThreat": "A self-service kiosk and chatbot now handle check-in, check-out, and most guest requests.",
-    "description": "The hotel is rolling out self-service kiosks for check-in. Convince Management a front desk agent is still worth staffing."
+    "title": "Nhân viên lễ tân khách sạn",
+    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
   },
   {
     "id": "job-009",
-    "title": "Software QA Tester",
-    "aiThreat": "An AI testing agent can now generate and run test cases across the whole codebase overnight.",
-    "description": "Engineering has an AI agent generating and running tests automatically. Convince Management a human QA tester still matters."
+    "title": "Nhân viên kiểm thử phần mềm (QA)",
+    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
   },
   {
     "id": "job-010",
-    "title": "Translator (Technical Documents)",
-    "aiThreat": "Machine translation quality has reached near-native fluency for the company's technical documentation.",
-    "description": "Machine translation now handles most of the technical docs. Convince Management a human translator is still necessary."
+    "title": "Biên dịch viên tài liệu kỹ thuật",
+    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
   },
   {
     "id": "job-011",
-    "title": "HR Recruiter (Resume Screening)",
-    "aiThreat": "An AI screening tool now ranks every incoming resume before a human ever sees the pile.",
-    "description": "An AI tool now pre-ranks every resume before HR sees them. Convince Management a human recruiter is still essential to the hiring process."
+    "title": "Chuyên viên tuyển dụng (Sàng lọc hồ sơ)",
+    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
   },
   {
     "id": "job-012",
-    "title": "Insurance Claims Adjuster",
-    "aiThreat": "An AI model can now assess photos of damage and approve straightforward claims automatically.",
-    "description": "Simple claims are now approved automatically by an AI model. Convince Management a human adjuster is still needed for the caseload."
+    "title": "Chuyên viên thẩm định bồi thường bảo hiểm",
+    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
   },
   {
     "id": "job-013",
-    "title": "Social Media Community Manager",
-    "aiThreat": "An AI agent can now draft, schedule, and even reply to routine comments across all channels.",
-    "description": "An AI agent now handles routine posting and replies. Convince Management a human community manager still adds real value."
+    "title": "Quản lý cộng đồng mạng xã hội",
+    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
   },
   {
     "id": "job-014",
-    "title": "Call Center Sales Rep",
-    "aiThreat": "A conversational AI voice agent can now handle full sales calls with a synthetic voice indistinguishable from a human's.",
-    "description": "A voice AI can now run entire sales calls. Convince Management a human sales rep still closes better."
+    "title": "Nhân viên tư vấn bán hàng qua tổng đài",
+    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
   },
   {
     "id": "job-015",
-    "title": "Data Entry Clerk",
-    "aiThreat": "An AI document-parsing pipeline can now extract and enter structured data from any scanned form.",
-    "description": "Document data now gets extracted and entered automatically. Convince Management a human clerk still has a role."
+    "title": "Nhân viên nhập liệu",
+    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
   }
 ]

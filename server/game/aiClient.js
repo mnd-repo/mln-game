@@ -31,11 +31,17 @@ export async function generateAiResume(jobDescription) {
 
   if (USE_MOCK) return fallback;
 
+  // const prompt =
+  //   `You are applying for this job under real time pressure, with only 90 seconds ` +
+  //   `to write a resume - the same constraint a human contestant has. Write a resume ` +
+  //   `that could plausibly have been typed that fast: a little rough around the edges ` +
+  //   `is fine and expected, don't make it suspiciously polished. Keep it under 120 words. OUTPUT FORMAT MUST BE RAW TEXT\n\n` +
+  //   `Job description: ${jobDescription}`;
+
   const prompt =
-    `You are applying for this job under real time pressure, with only 90 seconds ` +
-    `to write a resume - the same constraint a human contestant has. Write a resume ` +
-    `that could plausibly have been typed that fast: a little rough around the edges ` +
-    `is fine and expected, don't make it suspiciously polished. Keep it under 120 words. OUTPUT FORMAT MUST BE RAW TEXT\n\n` +
+    `Đóng vai là mội ứng viên đăng ký một công việc được miêu tả dưới đây. Bạn cần phải viết một đoạn văn nhỏ thuyết phục nhà tuyển dụng "Tại sao nên thuê hoặc giữ vị trí của bạn, thay vì tự động hóa băng AI.\n` +
+    `Đoạn viết cần phải đóng thế một người viết hồ sơ chỉ có 45 giây để viết. Đoạn văn không được quá dài dòng, văn phong không được quá đẹp. Viết giống người nhất có thể.\n` +
+    `VIẾT OUTPUT BẰNG RAW TEXT, KHÔNG ĐƯỢC FORMAT GÌ CẢ, KHÔNG ĐƯỢC QUẢ 2 ĐOẠN VÀ 80 TỪ.`
     `Job description: ${jobDescription}`;
 
   return withTimeout(
@@ -58,7 +64,7 @@ export async function getAiVerdict(jobDescription, humanResume) {
 
   const prompt =
     `Job description: ${jobDescription}\n\nCandidate resume: ${humanResume}\n\n` +
-    `Respond ONLY as JSON in this exact shape: {"decision": "hire" | "automate", "reasoning": "2-3 sentences"}`;
+    `Respond ONLY as JSON in this exact shape: {"decision": "hire" | "automate", "reasoning": "2-3 sentences IN VIETNAMESE"}`;
 
   return withTimeout(
     ai.models
