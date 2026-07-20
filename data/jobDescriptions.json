@@ -2,91 +2,91 @@
   {
     "id": "job-001",
     "title": "Trưởng nhóm phân loại yêu cầu hỗ trợ khách hàng",
-    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
-    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
+    "aiThreat": "Hệ thống AI phân luồng yêu cầu mới đã tự động xử lý tới 80% yêu cầu hỗ trợ mà không cần con người.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng vẫn cần giữ vị trí phụ trách phân loại yêu cầu hỗ trợ, dù công ty đang thử nghiệm AI tự động xử lý phiếu hỗ trợ."
   },
   {
     "id": "job-002",
     "title": "Nhân viên viết nội dung quảng cáo (Junior)",
-    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
-    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
+    "aiThreat": "Ban lãnh đạo marketing đang dùng AI để soạn bản nháp nội dung và rất ấn tượng với tốc độ.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng nhân viên viết nội dung mới vẫn mang lại giá trị mà AI không thể thay thế."
   },
   {
     "id": "job-003",
     "title": "Nhân viên kiểm kê kho",
-    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
-    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
+    "aiThreat": "Hệ thống thị giác máy tính dùng camera giờ có thể đếm và theo dõi hàng tồn kho theo thời gian thực trên toàn bộ kho.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng vẫn cần nhân viên kiểm kê để đảm bảo độ chính xác và kiểm soát kho."
   },
   {
     "id": "job-004",
-    "title": "Chuyên viên pháp lý hợp đồng",
-    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
-    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
+    "title": "Trợ lý pháp lý (Rà soát hợp đồng)",
+    "aiThreat": "Công cụ AI rà soát hợp đồng giờ có thể phát hiện điều khoản rủi ro chỉ trong vài giây, thay vì mất hàng giờ như trước.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng trợ lý pháp lý vẫn xứng đáng với chi phí dù AI có thể rà soát hợp đồng rất nhanh."
   },
   {
     "id": "job-005",
-    "title": "Kỹ thuật viên chẩn đoán hình ảnh (Sàng lọc phim chụp)",
-    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
-    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
+    "title": "Kỹ thuật viên chẩn đoán hình ảnh (Phân loại ca chụp)",
+    "aiThreat": "Mô hình AI đã được cơ quan quản lý phê duyệt có thể sàng lọc sơ bộ ảnh chụp để phát hiện bất thường trước khi con người xem.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng kinh nghiệm và phán đoán của kỹ thuật viên vẫn giữ vai trò then chốt."
   },
   {
     "id": "job-006",
-    "title": "Điều phối vận tải",
-    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
-    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
+    "title": "Điều phối xe tải",
+    "aiThreat": "Thuật toán tối ưu lộ trình giờ có thể tự phân công tài xế và tuyến đường mà không cần điều phối viên.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng điều phối viên con người vẫn không thể thiếu."
   },
   {
     "id": "job-007",
     "title": "Chuyên viên phân tích tài chính (Junior)",
-    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
-    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
+    "aiThreat": "Mô hình AI có thể lập dự báo quý và phát hiện bất thường nhanh hơn cả đội ngũ phân tích viên mới.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng vẫn cần chuyên viên phân tích tài chính cấp junior."
   },
   {
     "id": "job-008",
     "title": "Nhân viên lễ tân khách sạn",
-    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
-    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
+    "aiThreat": "Ki-ốt tự phục vụ và chatbot giờ xử lý việc nhận/trả phòng cùng phần lớn yêu cầu của khách.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng vẫn nên duy trì nhân sự lễ tân tại quầy."
   },
   {
     "id": "job-009",
     "title": "Nhân viên kiểm thử phần mềm (QA)",
-    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
-    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
+    "aiThreat": "Tác nhân AI kiểm thử có thể tự tạo và chạy các ca kiểm thử trên toàn bộ mã nguồn chỉ sau một đêm.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng QA thủ công vẫn có vai trò quan trọng."
   },
   {
     "id": "job-010",
     "title": "Biên dịch viên tài liệu kỹ thuật",
-    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
-    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
+    "aiThreat": "Chất lượng dịch máy đã đạt mức gần như người bản ngữ đối với tài liệu kỹ thuật của công ty.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng biên dịch viên con người vẫn cần thiết."
   },
   {
     "id": "job-011",
-    "title": "Chuyên viên tuyển dụng (Sàng lọc hồ sơ)",
-    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
-    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
+    "title": "Chuyên viên tuyển dụng nhân sự (Sàng lọc hồ sơ)",
+    "aiThreat": "Công cụ AI giờ tự xếp hạng mọi hồ sơ ứng tuyển trước khi nhân sự xem.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng chuyên viên tuyển dụng vẫn giữ vai trò cốt lõi trong quy trình tuyển dụng."
   },
   {
     "id": "job-012",
-    "title": "Chuyên viên thẩm định bồi thường bảo hiểm",
-    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
-    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
+    "title": "Chuyên viên giám định bồi thường bảo hiểm",
+    "aiThreat": "Mô hình AI giờ có thể đánh giá ảnh thiệt hại và tự động phê duyệt các hồ sơ bồi thường đơn giản.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng vẫn cần chuyên viên giám định để xử lý hồ sơ bồi thường."
   },
   {
     "id": "job-013",
     "title": "Quản lý cộng đồng mạng xã hội",
-    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
-    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
+    "aiThreat": "Tác nhân AI giờ có thể soạn bài, lên lịch đăng và trả lời các bình luận thông thường trên mọi kênh.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng quản lý cộng đồng vẫn tạo ra giá trị thực sự."
   },
   {
     "id": "job-014",
-    "title": "Nhân viên tư vấn bán hàng qua tổng đài",
-    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
-    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
+    "title": "Nhân viên kinh doanh tổng đài",
+    "aiThreat": "Tổng đài AI hội thoại giờ có thể thực hiện trọn vẹn cuộc gọi bán hàng bằng giọng nói nhân tạo gần như không thể phân biệt với người thật.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng nhân viên kinh doanh vẫn chốt đơn hiệu quả hơn."
   },
   {
     "id": "job-015",
     "title": "Nhân viên nhập liệu",
-    "aiThreat": "AI đang đảm nhiệm phần lớn công việc vốn do con người thực hiện.",
-    "description": "Hãy thuyết phục Ban lãnh đạo rằng vị trí này vẫn mang lại giá trị mà AI chưa thể thay thế hoàn toàn."
+    "aiThreat": "Hệ thống AI xử lý tài liệu giờ có thể tự trích xuất và nhập dữ liệu có cấu trúc từ hầu như mọi biểu mẫu được quét.",
+    "description": "Hãy thuyết phục Ban lãnh đạo rằng nhân viên nhập liệu vẫn có vai trò nhất định."
   }
 ]
