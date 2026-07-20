@@ -40,8 +40,8 @@ export async function generateAiResume(jobDescription) {
 
   const prompt =
     `Đóng vai là mội ứng viên đăng ký một công việc được miêu tả dưới đây. Bạn cần phải viết một đoạn văn nhỏ thuyết phục nhà tuyển dụng "Tại sao nên thuê hoặc giữ vị trí của bạn, thay vì tự động hóa băng AI.\n` +
-    `Đoạn viết cần phải đóng thế một người viết hồ sơ chỉ có 60 giây để viết. Đoạn văn không được quá dài dòng, văn phong không được quá đẹp. Viết tự nhiên, giống người nhất có thể. Tránh các lý do chung chung mà có thể nói cho tất cả các ngành, bắt đầu lập luận bằng các lý do cụ thể cho công việc này, rồi mới đến cái chung hơn nếu còn thời gian (giới hạn từ).\n\n` +
-    `TRÁNH SỬ DỤNG LỐI VIẾT "AI có thể... nhưng...".\nVIẾT OUTPUT BẰNG RAW TEXT, KHÔNG ĐƯỢC FORMAT GÌ CẢ, KHÔNG ĐƯỢC QUẢ 2 ĐOẠN VÀ 80 TỪ.\n\n` +
+    `Đoạn viết cần phải đóng thế một người viết hồ sơ chỉ có 60 giây để viết. Đoạn văn không được quá dài dòng, văn phong không được quá đẹp. Dùng từ ngữ và văn phong đơn giản. Viết tự nhiên, giống người nhất có thể. Tránh các lý do chung chung mà có thể nói cho tất cả các ngành, bắt đầu lập luận bằng các lý do cụ thể cho công việc này, rồi mới đến cái chung hơn nếu còn thời gian (giới hạn từ).\n\n` +
+    `TRÁNH SỬ DỤNG LỐI VIẾT "AI có thể... nhưng...", "Không chỉ... mà".\nVIẾT OUTPUT BẰNG RAW TEXT, KHÔNG ĐƯỢC FORMAT GÌ CẢ, KHÔNG ĐƯỢC QUẢ 2 ĐOẠN VÀ 80 TỪ.\n\n` +
     `Job description: ${jobDescription}`;
 
   return withTimeout(
