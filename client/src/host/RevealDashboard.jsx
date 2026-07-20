@@ -79,7 +79,7 @@ export default function RevealDashboard({ dashboard }) {
             <p>
               "{r.aiVerdictReasoning}" — Quyết định:{' '}
               <span className={r.aiVerdictDecision === 'hire' ? 'decision-hire' : 'decision-automate'}>
-                {r.aiVerdictDecision === 'hire' ? 'THUÊ' : 'TỰ ĐỘNG HÓA'}
+                {r.aiVerdictDecision === 'hire' ? 'GIỮ VIỆC' : 'TỰ ĐỘNG HÓA'}
               </span>
             </p>
           </div>

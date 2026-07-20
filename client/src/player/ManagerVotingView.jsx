@@ -28,11 +28,11 @@ export default function ManagerVotingView({ jobTitle, jobDescription, candidateR
         </div>
 
         <p className="hand-note centered" style={{ textAlign: 'center' }}>
-          Thuê, hay tự động hóa?
+          Giữ việc, hay tự động hóa?
         </p>
         <div className="stamp-row">
           <StampButton
-            label="Thuê"
+            label="Giữ việc"
             variant="hire"
             onClick={() => handleVote('hire')}
             disabled={Boolean(voted)}
