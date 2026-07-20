@@ -37,7 +37,7 @@ export default function RevealDashboard({ dashboard }) {
       </div>
 
       <PaperCard attach="pin" pin="blue" tilt={-0.3} centered>
-        <h2 className="paper-title">Tỷ lệ duyệt thuê</h2>
+        <h2 className="paper-title">Tỷ lệ duyệt</h2>
         <div className="stat-row">
           <div className="stat">
             <span className="stat-label">Hồ sơ của bạn</span>

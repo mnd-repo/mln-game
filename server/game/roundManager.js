@@ -2,12 +2,16 @@ import { nanoid } from 'nanoid';
 import { generateAiResume, getAiVerdict } from './aiClient.js';
 import { splitManagers } from './split.js';
 
+function sleep(ms) {
+  return new Promise((res) => setTimeout(res, ms));
+}
+
 export class GameRoom {
   constructor({ gameId, queries, jobPool, roundsTotal, broadcast, writingSeconds, votingSeconds }) {
     this.gameId = gameId;
     this.q = queries;
     this.jobPool = jobPool;
-    this.roundsTotal = roundsTotal;
+    this.roundsTotal = roundsTotal; // target number of writers/rounds from config
     this.broadcast = broadcast; // (payload) => void, sends to all sockets for this game
     this.writingSeconds = writingSeconds;
     this.votingSeconds = votingSeconds;
@@ -15,10 +19,12 @@ export class GameRoom {
     this.hostSocket = null;
     this.players = new Map(); // playerId -> { socket, name }
     this.usedJobIds = new Set();
-    this.jobSeekerHistory = []; // player ids who have been job seeker, in order
 
     this.status = 'lobby'; // lobby | writing | voting | complete | reveal
-    this.currentRound = null; // in-memory round record
+    this.writingRounds = []; // all rounds for this game, created up front at writing phase start
+    this.submittedWriters = new Set();
+    this.gradingIndex = -1; // index into writingRounds currently being graded
+    this.currentRound = null; // alias to writingRounds[gradingIndex] while grading
     this.timer = null;
   }
 
@@ -37,7 +43,7 @@ export class GameRoom {
       players: [...this.players.entries()].map(([id, p]) => ({ id, name: p.name })),
       status: this.status,
       currentRound: this.currentRound?.roundNumber ?? 0,
-      roundsTotal: this.roundsTotal
+      roundsTotal: this.writingRounds.length || this.roundsTotal
     };
   }
 
@@ -61,13 +67,6 @@ export class GameRoom {
     this.broadcastAll('roster_update', this.rosterPayload());
   }
 
-  pickJobSeeker() {
-    const ids = [...this.players.keys()];
-    const notUsed = ids.filter((id) => !this.jobSeekerHistory.includes(id));
-    const pool = notUsed.length > 0 ? notUsed : ids;
-    return pool[Math.floor(Math.random() * pool.length)];
-  }
-
   pickJob() {
     const notUsed = this.jobPool.filter((j) => !this.usedJobIds.has(j.id));
     const pool = notUsed.length > 0 ? notUsed : this.jobPool;
@@ -76,101 +75,158 @@ export class GameRoom {
     return job;
   }
 
+  shuffledIds() {
+    const ids = [...this.players.keys()];
+    for (let i = ids.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [ids[i], ids[j]] = [ids[j], ids[i]];
+    }
+    return ids;
+  }
+
   startGame() {
     if (this.players.size < 4) {
       throw new Error('Need at least 4 players to start.');
     }
     this.status = 'writing';
     this.q.updateGameStatus.run('writing', this.gameId);
-    this.startNextRound();
+    this.beginWritingPhase();
   }
 
-  startNextRound() {
-    const roundNumber = (this.currentRound?.roundNumber ?? 0) + 1;
-    if (roundNumber > this.roundsTotal) {
+  // Front-loads every writing slot at once: picks N distinct players (N = min(roundsTotal,
+  // playerCount)), hands each a different job description, and starts a single shared timer.
+  beginWritingPhase() {
+    const writerCount = Math.min(this.roundsTotal, this.players.size);
+    const writerIds = this.shuffledIds().slice(0, writerCount);
+
+    this.writingRounds = [];
+    this.submittedWriters = new Set();
+    this.gradingIndex = -1;
+    this.currentRound = null;
+
+    const deadline = Date.now() + this.writingSeconds * 1000;
+    this.writingDeadline = deadline;
+
+    writerIds.forEach((jobSeekerId, idx) => {
+      const job = this.pickJob();
+      const roundId = nanoid();
+      const roundNumber = idx + 1;
+
+      this.q.insertRound.run(roundId, this.gameId, roundNumber, jobSeekerId, job.title, job.description);
+
+      const record = {
+        id: roundId,
+        roundNumber,
+        jobSeekerId,
+        job,
+        deadline,
+        humanResume: null,
+        aiResume: null,
+        aiVerdict: null,
+        submitted: false
+      };
+      this.writingRounds.push(record);
+
+      // Kick off AI resume generation in parallel with the human's timer.
+      generateAiResume(job.description).then((resume) => {
+        record.aiResume = resume;
+      });
+
+      // Each writer privately gets their own job description.
+      this.send(this.players.get(jobSeekerId)?.socket, 'round_start', {
+        roundNumber,
+        roundsTotal: writerCount,
+        jobTitle: job.title,
+        jobDescription: job.description,
+        deadline
+      });
+    });
+
+    // Everyone else (spectators + host) gets a generic "writing round in progress" signal,
+    // with no job details, since there are multiple different jobs in flight at once.
+    const writerIdSet = new Set(writerIds);
+    for (const [id, p] of this.players.entries()) {
+      if (!writerIdSet.has(id)) {
+        this.send(p.socket, 'writing_phase_start', { deadline, roundsTotal: writerCount, writerCount });
+      }
+    }
+    this.send(this.hostSocket, 'writing_phase_start', {
+      deadline,
+      roundsTotal: writerCount,
+      writerCount,
+      submitted: 0
+    });
+
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => this.lockAllWriting(), this.writingSeconds * 1000 + 500);
+  }
+
+  submitResume(playerId, text) {
+    if (this.status !== 'writing') return;
+    const r = this.writingRounds.find((rr) => rr.jobSeekerId === playerId && !rr.submitted);
+    if (!r) return;
+
+    r.submitted = true;
+    r.humanResume = text || '(no resume submitted)';
+    this.q.setHumanResume.run(r.humanResume, Date.now(), r.id);
+    this.submittedWriters.add(playerId);
+
+    // Let this writer know their resume is locked in while they wait on the others.
+    this.send(this.players.get(playerId)?.socket, 'resume_locked', { roundNumber: r.roundNumber });
+    this.send(this.hostSocket, 'writer_progress', {
+      submitted: this.submittedWriters.size,
+      total: this.writingRounds.length
+    });
+
+    // Once every writer is done, move on immediately rather than waiting out the timer -
+    // mirrors the "all voters done" early-completion behavior used during grading.
+    if (this.submittedWriters.size >= this.writingRounds.length) {
+      this.lockAllWriting();
+    }
+  }
+
+  lockAllWriting() {
+    if (this.status !== 'writing') return;
+    clearTimeout(this.timer);
+
+    for (const r of this.writingRounds) {
+      if (!r.submitted) {
+        r.submitted = true;
+        r.humanResume = '(no resume submitted in time)';
+        this.q.setHumanResume.run(r.humanResume, Date.now(), r.id);
+      }
+    }
+
+    this.broadcastAll('writing_phase_locked', {});
+    this.startGradingRound(0);
+  }
+
+  // Walks through the N submitted resumes one at a time, reusing the existing
+  // voting/split/complete-round flow for each.
+  async startGradingRound(index) {
+    if (index >= this.writingRounds.length) {
       this.finishGame();
       return;
     }
 
-    const jobSeekerId = this.pickJobSeeker();
-    this.jobSeekerHistory.push(jobSeekerId);
-    const job = this.pickJob();
-    const roundId = nanoid();
+    this.gradingIndex = index;
+    const r = this.writingRounds[index];
+    this.currentRound = r;
+    this.q.updateGameRound.run(r.roundNumber, this.gameId);
 
-    this.q.insertRound.run(
-      roundId,
-      this.gameId,
-      roundNumber,
-      jobSeekerId,
-      job.title,
-      job.description
-    );
-
-    const deadline = Date.now() + this.writingSeconds * 1000;
-    this.currentRound = {
-      id: roundId,
-      roundNumber,
-      jobSeekerId,
-      job,
-      deadline,
-      humanResume: null,
-      aiResume: null,
-      aiVerdict: null,
-      submitted: false
-    };
-    this.status = 'writing';
-    this.q.updateGameRound.run(roundNumber, this.gameId);
-
-    // Kick off AI resume generation in parallel with the human's timer.
-    generateAiResume(job.description).then((resume) => {
-      if (this.currentRound?.id === roundId) this.currentRound.aiResume = resume;
-    });
-
-    this.broadcastAll('round_start', {
-      roundNumber,
-      roundsTotal: this.roundsTotal,
-      jobSeekerId,
-      jobTitle: job.title,
-      jobDescription: job.description,
-      deadline
-    });
-
-    clearTimeout(this.timer);
-    this.timer = setTimeout(() => this.lockWriting(roundId), this.writingSeconds * 1000 + 500);
-  }
-
-  submitResume(playerId, text) {
-    const r = this.currentRound;
-    if (!r || r.jobSeekerId !== playerId || this.status !== 'writing' || r.submitted) return;
-    r.submitted = true;
-    r.humanResume = text || '(no resume submitted)';
-    this.q.setHumanResume.run(r.humanResume, Date.now(), r.id);
-    this.lockWriting(r.id);
-  }
-
-  async lockWriting(roundId) {
-    const r = this.currentRound;
-    if (!r || r.id !== roundId || this.status !== 'writing') return;
-    clearTimeout(this.timer);
-
-    if (!r.humanResume) {
-      r.humanResume = '(no resume submitted in time)';
-      this.q.setHumanResume.run(r.humanResume, Date.now(), r.id);
-    }
-
-    this.broadcastAll('resume_locked', { roundNumber: r.roundNumber });
-
-    // Ensure AI resume is ready before voting; wait briefly if it hasn't resolved yet.
+    // Ensure the AI resume is ready before voting; wait briefly if it hasn't resolved yet.
     let waited = 0;
     while (!r.aiResume && waited < 8000) {
-      await new Promise((res) => setTimeout(res, 200));
+      await sleep(200);
       waited += 200;
     }
     if (!r.aiResume) r.aiResume = 'I bring strong, adaptable experience to this role.';
 
-    const verdict = await getAiVerdict(r.job.description, r.humanResume);
-    r.aiVerdict = verdict;
-    this.q.setAiResumeAndVerdict.run(r.aiResume, verdict.reasoning, verdict.decision, r.id);
+    if (!r.aiVerdict) {
+      const verdict = await getAiVerdict(r.job.description, r.humanResume);
+      r.aiVerdict = verdict;
+      this.q.setAiResumeAndVerdict.run(r.aiResume, verdict.reasoning, verdict.decision, r.id);
+    }
 
     this.startVoting();
   }
@@ -180,6 +236,8 @@ export class GameRoom {
     this.status = 'voting';
     this.q.setRoundStatus.run('voting', r.id);
 
+    // Management pool is unchanged in size round to round - every player except this
+    // round's writer, including writers whose own round has already been graded.
     const managerIds = [...this.players.keys()].filter((id) => id !== r.jobSeekerId);
     const { groupHuman, groupAi } = splitManagers(managerIds, r.id);
 
@@ -201,6 +259,7 @@ export class GameRoom {
     // Job seeker sees a waiting screen; managers each get their assigned resume.
     this.send(this.players.get(r.jobSeekerId)?.socket, 'voting_start', {
       roundNumber: r.roundNumber,
+      roundsTotal: this.writingRounds.length,
       isJobSeeker: true,
       deadline
     });
@@ -209,6 +268,7 @@ export class GameRoom {
       const resumeText = group === 'human' ? r.humanResume : r.aiResume;
       this.send(this.players.get(id)?.socket, 'voting_start', {
         roundNumber: r.roundNumber,
+        roundsTotal: this.writingRounds.length,
         isJobSeeker: false,
         candidateResume: resumeText,
         jobTitle: r.job.title,
@@ -218,6 +278,7 @@ export class GameRoom {
     }
     this.send(this.hostSocket, 'voting_start', {
       roundNumber: r.roundNumber,
+      roundsTotal: this.writingRounds.length,
       isHost: true,
       jobTitle: r.job.title,
       deadline
@@ -252,9 +313,9 @@ export class GameRoom {
     // Deliberately no decision/verdict is broadcast here - the whole point of the
     // game is that results stay hidden until the final reveal. Just acknowledge
     // the round wrapped up and move on.
-    this.broadcastAll('round_result', { roundNumber: r.roundNumber });
+    this.broadcastAll('round_result', { roundNumber: r.roundNumber, roundsTotal: this.writingRounds.length });
 
-    setTimeout(() => this.startNextRound(), 2500);
+    setTimeout(() => this.startGradingRound(this.gradingIndex + 1), 2500);
   }
 
   finishGame() {

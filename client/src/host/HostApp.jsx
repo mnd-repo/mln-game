@@ -37,10 +37,13 @@ function RoundTabs({ current, total }) {
         case 'roster_update':
           setRoster(payload);
           break;
-        case 'round_start':
-          setPhase({ view: 'writing', ...payload });
+        case 'writing_phase_start':
+          setPhase({ view: 'writing_phase', submitted: 0, ...payload });
           break;
-        case 'resume_locked':
+        case 'writer_progress':
+          setPhase((p) => ({ ...p, submitted: payload.submitted, total: payload.total }));
+          break;
+        case 'writing_phase_locked':
           setPhase((p) => ({ ...p, view: 'evaluating' }));
           break;
         case 'voting_start':
@@ -72,7 +75,14 @@ function RoundTabs({ current, total }) {
       return <RevealDashboard dashboard={dashboard} />;
     }
 
-    const sceneType = phase.view === 'writing' ? 'writer' : phase.view === 'voting' || phase.view === 'result' ? 'manager' : 'lobby';
+    const sceneType =
+      phase.view === 'writing_phase'
+        ? 'writer'
+        : phase.view === 'voting' || phase.view === 'result'
+          ? 'manager'
+          : 'lobby';
+
+    const showRoundTabs = phase.view === 'voting' || phase.view === 'result' || phase.view === 'evaluating';
 
     return (
       <Scene type={sceneType} wide>
@@ -84,7 +94,7 @@ function RoundTabs({ current, total }) {
           </p>
         </div>
 
-        {phase.view !== 'lobby' && <RoundTabs current={phase.roundNumber} total={phase.roundsTotal || roster.roundsTotal} />}
+        {showRoundTabs && <RoundTabs current={phase.roundNumber} total={phase.roundsTotal || roster.roundsTotal} />}
 
         {phase.view === 'lobby' && (
           <PaperCard attach="pin" pin="blue" tilt={-0.4} centered>
@@ -102,13 +112,14 @@ function RoundTabs({ current, total }) {
           </PaperCard>
         )}
 
-        {phase.view === 'writing' && (
+        {phase.view === 'writing_phase' && (
           <PaperCard attach="pin" pin="red" tilt={-0.5} centered>
-            <p className="round-label">Vòng {phase.roundNumber} / {phase.roundsTotal}</p>
-            <h2 className="paper-title">{phase.jobTitle}</h2>
-            <p className="job-desc">{phase.jobDescription}</p>
+            <h2 className="paper-title">Vòng viết hồ sơ</h2>
+            <p className="job-desc">{phase.writerCount || phase.roundsTotal} ứng viên đang viết hồ sơ cho các công việc khác nhau.</p>
             <CountdownBar deadline={phase.deadline} />
-            <p className="hand-note">Ứng viên đang viết hồ sơ…</p>
+            <p className="hand-note">
+              Đã nộp: {phase.submitted ?? 0} / {phase.total ?? phase.writerCount ?? phase.roundsTotal}
+            </p>
           </PaperCard>
         )}
 
@@ -123,7 +134,7 @@ function RoundTabs({ current, total }) {
           <PaperCard attach="pin" pin="blue" tilt={-0.3} centered>
             <h2 className="paper-title">{phase.jobTitle}</h2>
             <CountdownBar deadline={phase.deadline} />
-            <p className="hand-note">Ban quản lý bỏ phiếu: Thuê hay Tự động hóa?</p>
+            <p className="hand-note">Ban quản lý bỏ phiếu: Giữ việc hay Tự động hóa?</p>
           </PaperCard>
         )}
 

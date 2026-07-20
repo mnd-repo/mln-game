@@ -20,7 +20,7 @@ export default function JobSeekerWritingView({ jobTitle, jobDescription, deadlin
         <h3 className="job-title">{jobTitle}</h3>
         <p className="job-desc">{jobDescription}</p>
         <CountdownBar deadline={deadline} soundKey="writer-countdown" />
-        <p className="hand-note">90 giây — cần thuyết phục Ban quản lý giữ việc của bạn.</p>
+        <p className="hand-note">Thời gian giới hạn — hãy thuyết phục ban quản lý giữ việc của bạn.</p>
       </PaperCard>
 
       <PaperCard attach="tape" tilt={0.6}>

@@ -5,9 +5,10 @@ import Scene from '../components/Scene.jsx';
 import PaperCard from '../components/PaperCard.jsx';
 import LobbyScreen from './LobbyScreen.jsx';
 import JobSeekerWritingView from './JobSeekerWritingView.jsx';
-import ManagerWaitingView from './ManagerWaitingView.jsx';
 import ManagerVotingView from './ManagerVotingView.jsx';
 import RoundCompleteView from './RoundCompleteView.jsx';
+import WritingPhaseWaitView from './WritingPhaseWaitView.jsx';
+import WriterSubmittedView from './WriterSubmittedView.jsx';
 
 export default function PlayerApp() {
   const { code } = useParams();
@@ -29,14 +30,17 @@ export default function PlayerApp() {
         case 'roster_update':
           setRoster(payload);
           break;
+        case 'writing_phase_start':
+          // Sent only to non-writers (spectators): generic screen, no job details.
+          setPhase({ view: 'writing_wait', ...payload });
+          break;
         case 'round_start':
-          setPhase({
-            view: payload.jobSeekerId === playerId ? 'writing' : 'waiting',
-            ...payload
-          });
+          // Sent privately only to the player who was assigned to write this job.
+          setPhase({ view: 'writing', ...payload });
           break;
         case 'resume_locked':
-          setPhase((p) => ({ ...p, view: p.jobSeekerId === playerId ? 'evaluating' : 'waiting' }));
+          // Sent privately to a writer once their own resume is locked in.
+          setPhase((p) => ({ ...p, view: 'writer_submitted' }));
           break;
         case 'voting_start':
           setPhase({
@@ -94,17 +98,10 @@ export default function PlayerApp() {
           onSubmit={(text) => send('submit_resume', { text })}
         />
       );
-    case 'evaluating':
-      return (
-        <Scene type="writer">
-          <PaperCard attach="pin" pin="green" tilt={-0.4} centered>
-            <h2 className="paper-title">Hồ sơ đã được gửi!</h2>
-            <p className="hint">Ban quản lý đang xem xét…</p>
-          </PaperCard>
-        </Scene>
-      );
-    case 'waiting':
-      return <ManagerWaitingView jobTitle={phase.jobTitle} />;
+    case 'writer_submitted':
+      return <WriterSubmittedView />;
+    case 'writing_wait':
+      return <WritingPhaseWaitView deadline={phase.deadline} />;
     case 'seeker_waiting':
       return (
         <Scene type="writer">
